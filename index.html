@@ -113,107 +113,96 @@
                     }
                 } else if (level === 1) {
                     if (userInput.toLowerCase() === "hello there") {
-                        const trollCheck = "Ahahahaha! You think I'm a fool?";
-                        console.log(trollCheck);
-                    } else if (userInput.toLowerCase() === "to be or not to be" || userInput === "317") {
+                        const trollCheck = "Ahahahaha! You really thought it'd be that easy, didn't you? Try again!";
+                        insertTextWithDelay(levelTextAreas[1], trollCheck);
+                    } else if (userInput === "exnewoeie") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 2) {
-                    if (userInput.toLowerCase() === "password") {
+                    if (userInput.toLowerCase() === "great job") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 3) {
-                    if (userInput.toLowerCase() === "thisistheend") {
+                    if (userInput === "82 69 68 69 77 80 84 79 82 65 82 66 73 84 69 82 83 65 80 73 69 78 84 73 83 83 73 77 85 83 79 77 78 73 80 79 84 69 78 83 73 85 68 69 88 79 77 78 73 80 79 84 69 78 83 82 69 68 69 77 80 84 79 82 79 80 84 73 77 85 83 77 65 71 78 85 83 77 65 71 78 85 83 82 69 88 79 80 73 70 69 88") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 4) {
-                    if (userInput.toLowerCase() === "dnuoranrut") {
+                    if (userInput.toLowerCase() === "turnaround") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 5) {
-                    if (userInput.toLowerCase() === "Inscryption") {
+                    if (userInput.toLowerCase() === "zodhavugzro") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 6) {
-                    if (userInput.toLowerCase() === "password") {
+                    if (userInput === "11111111110010001010101110101111111010111111111101101101101100000110100100100101111111111110010100000000000000000000000000000000000000000000000010101111111111111111110010100010101111001010000000000000000000000000001010111001010000000000000000000000000000000000000000000001010") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 7) {
-                    if (userInput.toLowerCase() === "una galleta inteligente") {
+                    if (userInput === "944831 17214207329631 4197552842291728129632") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 8) {
-                    if (userInput.toLowerCase() === "La Guaneña") {
+                    if (userInput.toLowerCase() === "que a mi sí que a otroay no, la uaneñagay me lo urójay, me ecibióray la aticaplay, y con otroay se la astógay") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 9) {
-                    if (userInput.toLowerCase() === "key") {
-                        nextLevel();
+                    if (userInput.toLowerCase() === "what is the password?") {
+                        outroText.style.display = 'block';
+                        const congratulationsText = "Congratulations! You've successfully completed all levels of the puzzle. Well done!";
+                        insertTextWithDelay(outroText.querySelector('textarea'), congratulationsText);
                     } else {
                         handleIncorrectInput();
                     }
                 }
-            }
-
-            function handleIncorrectInput() {
-                // Handle incorrect input
-                // ...
             }
 
             function nextLevel() {
                 currentLevel++;
                 if (currentLevel < frames.length) {
                     showLevel(currentLevel);
-                } else {
-                    showOutro();
+                    levelTextAreas[currentLevel].value = '';
+                    insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
                 }
             }
 
-            function showOutro() {
-                frames.forEach(frame => {
-                    frame.style.display = 'none';
-                });
-
-                outroText.style.display = 'block';
-
-                const outroMessage = "Congratulations! You have successfully completed all the levels of the puzzle game. " +
-                    "You have proven your intelligence and problem-solving skills. Well done!\n\n";
-
-                insertTextWithDelay(outroText.querySelector('textarea'), outroMessage);
+            function handleIncorrectInput() {
+                const attempts = 10;
+                const attemptsRemaining = attempts - (currentLevel + 1);
+                if (attemptsRemaining > 0) {
+                    alert('Incorrect input. Please try again. Attempts remaining: ' + attemptsRemaining);
+                } else {
+                    alert('Game Over. Please try again.');
+                }
             }
 
-            frames.forEach((frame, index) => {
-                const levelTextArea = levelTextAreas[index];
-                const encryptedLabel = encryptedLabels[index];
-                const submitButton = submitButtons[index];
-
-                levelTextArea.value = '';
-                encryptedLabel.textContent = encryptedTexts[index];
-
-                insertTextWithDelay(levelTextArea, levelTexts[index]);
-
-                submitButton.addEventListener('click', () => {
+            submitButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
                     checkInput(index);
                 });
             });
 
             showLevel(currentLevel);
+            insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
+            encryptedLabels.forEach((label, index) => {
+                label.textContent = encryptedTexts[index];
+            });
         });
     </script>
 </body>
