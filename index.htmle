@@ -2,21 +2,30 @@
 <html>
 <head>
     <title>Puzzle Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="frame">
-            <textarea class="level-text" cols="50" rows="10" disabled></textarea><br>
-            <label class="encrypted-label"></label><br>
-            <input class="input-entry" type="text"><br>
-            <button class="submit-button">Submit</button>
-        </div>
-        <textarea id="outro-text" cols="50" rows="10" disabled></textarea>
+    <div class="frame">
+        <h1>Level 1</h1>
+        <textarea class="level-text" readonly></textarea>
+        <label class="encrypted-label"></label>
+        <input type="text" class="input-entry">
+        <button class="submit-button">Submit</button>
     </div>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
+    <!-- ... Levels 2 to 9 ... -->
+    <div class="frame">
+        <h1>Level 10</h1>
+        <textarea class="level-text" readonly></textarea>
+        <label class="encrypted-label"></label>
+        <input type="text" class="input-entry">
+        <button class="submit-button">Submit</button>
+    </div>
+    <div id="outro-text" style="display: none;">
+        <h1>Congratulations!</h1>
+        <textarea readonly></textarea>
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
             const levelTexts = [
                 "Here's level 1 of the puzzle. Good luck decoding it!\n" +
                 "Remember, you are allowed only 10 attempts per level, make it count!",
@@ -186,7 +195,7 @@
                 const outroMessage = "Congratulations! You have successfully completed all the levels of the puzzle game. " +
                     "You have proven your intelligence and problem-solving skills. Well done!\n\n";
 
-                insertTextWithDelay(outroText, outroMessage);
+                insertTextWithDelay(outroText.querySelector('textarea'), outroMessage);
             }
 
             frames.forEach((frame, index) => {
