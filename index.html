@@ -3,103 +3,7 @@
 <head>
     <title>Puzzle Game</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        @import 'reset'; // Optionally import a CSS reset or normalize file if desired
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #222;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    box-sizing: border-box;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.frame {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 50vh;
-    max-width: 500px;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #333;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.level-text {
-    width: 100%;
-    height: 150px;
-    resize: none;
-    font-size: 16px;
-    margin-bottom: 5px;
-    border: none;
-    border-radius: 8px;
-    background-color: #555;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.encrypted-label {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.input-entry {
-    width: 100%;
-    height: 25px;
-    resize: none;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #555;
-    color: #fff;
-}
-
-.submit-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-    background-color: #45a049;
-}
-
-#outro-text {
-    display: none;
-    width: 100%;
-    height: 150px;
-    resize: none;
-    font-size: 16px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #555;
-    color: #fff;
-}
-    </style>
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -109,6 +13,8 @@ html, body {
             <input class="input-entry" type="text"><br>
             <button class="submit-button">Submit</button>
         </div>
+        <textarea id="outro-text" cols="50" rows="10" disabled></textarea>
+    </div>
     </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -162,6 +68,7 @@ html, body {
             const levelTextAreas = document.querySelectorAll('.level-text');
             const encryptedLabels = document.querySelectorAll('.encrypted-label');
             const submitButtons = document.querySelectorAll('.submit-button');
+            const outroText = document.getElementById('outro-text');
 
             let currentLevel = 0;
 
@@ -188,14 +95,16 @@ html, body {
             }
 
             function checkInput(level) {
-                const userInput = inputEntries[level].value;
+    const userInput = inputEntries[level].value;
 
-                if (level === 0) {
-                    if (userInput.toLowerCase() === "hello there") {
-                        nextLevel();
-                    } else {
-                        handleIncorrectInput();
-                    }
+    if (level === 0) {
+        if (userInput.toLowerCase() === "hello there") {
+            nextLevel();
+        } else {
+            handleIncorrectInput();
+            return; // Add this line to prevent the code from continuing to the incorrect condition
+        }
+    }
                 } else if (level === 1) {
                     if (userInput.toLowerCase() === "hello there") {
                         const trollCheck = "Ahahahaha! You think I'm a fool?";
@@ -224,38 +133,32 @@ html, body {
                         handleIncorrectInput();
                     }
                 } else if (level === 5) {
-                    if (userInput.toLowerCase() === "riddles") {
+                    if (userInput.toLowerCase() === "west") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 6) {
-                    if (userInput.toLowerCase() === "decode") {
+                    if (userInput.toLowerCase() === "gandalf") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 7) {
-                    if (userInput.toLowerCase() === "impossible") {
+                    if (userInput.toLowerCase() === "spider-man") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 8) {
-                    if (userInput.toLowerCase() === "mindbender") {
+                    if (userInput.toLowerCase() === "http") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 9) {
-                    if (userInput.toLowerCase() === "observation") {
+                    if (userInput.toLowerCase() === "key") {
                         nextLevel();
-                    } else {
-                        handleIncorrectInput();
-                    }
-                } else if (level === 10) {
-                    if (userInput.toLowerCase() === "open sesame") {
-                        alert("Congratulations! You've completed the puzzle.");
                     } else {
                         handleIncorrectInput();
                     }
@@ -263,41 +166,45 @@ html, body {
             }
 
             function handleIncorrectInput() {
-                const attemptsLeft = 10 - parseInt(inputEntries[currentLevel].dataset.attempts);
-                if (attemptsLeft === 1) {
-                    alert("Sorry, incorrect input. You have 1 attempt left.");
-                } else if (attemptsLeft === 0) {
-                    alert("Game Over! You have no more attempts left.");
-                } else {
-                    alert(`Sorry, incorrect input. You have ${attemptsLeft} attempts left.`);
-                }
-                inputEntries[currentLevel].dataset.attempts = parseInt(inputEntries[currentLevel].dataset.attempts) + 1;
-                inputEntries[currentLevel].value = "";
+                // Handle incorrect input
+                // ...
             }
 
             function nextLevel() {
                 currentLevel++;
-                if (currentLevel <= 10) {
+                if (currentLevel < frames.length) {
                     showLevel(currentLevel);
-                    inputEntries[currentLevel].dataset.attempts = 0;
-                    levelTextAreas[currentLevel].value = "";
-                    encryptedLabels[currentLevel].innerText = "";
+                } else {
+                    showOutro();
                 }
             }
 
-            submitButtons.forEach((button, index) => {
-                button.addEventListener('click', (event) => {
-                    event.preventDefault();
+            function showOutro() {
+                frames.forEach(frame => {
+                    frame.style.display = 'none';
+                });
+
+                outroText.style.display = 'block';
+
+                const outroMessage = "Congratulations! You have successfully completed all the levels of the puzzle game. " +
+                    "You have proven your intelligence and problem-solving skills. Well done!\n\n";
+
+                insertTextWithDelay(outroText, outroMessage);
+            }
+
+            frames.forEach((frame, index) => {
+                const levelTextArea = levelTextAreas[index];
+                const encryptedLabel = encryptedLabels[index];
+                const submitButton = submitButtons[index];
+
+                levelTextArea.value = '';
+                encryptedLabel.textContent = encryptedTexts[index];
+
+                insertTextWithDelay(levelTextArea, levelTexts[index]);
+
+                submitButton.addEventListener('click', () => {
                     checkInput(index);
                 });
-            });
-
-            levelTexts.forEach((text, index) => {
-                insertTextWithDelay(levelTextAreas[index], text);
-            });
-
-            encryptedTexts.forEach((text, index) => {
-                insertTextWithDelay(encryptedLabels[index], text);
             });
 
             showLevel(currentLevel);
