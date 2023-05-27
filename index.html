@@ -3,7 +3,9 @@
 <head>
     <title>Puzzle Game</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    <style>
+        /* Add your CSS styles here */
+    </style>
 </head>
 <body>
     <div class="container">
@@ -146,14 +148,20 @@
                         handleIncorrectInput();
                     }
                 } else if (level === 8) {
-                    if (userInput.toLowerCase() === "observation") {
+                    if (userInput.toLowerCase() === "mindbender") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 9) {
-                    if (userInput.toLowerCase() === "what is the password") {
+                    if (userInput.toLowerCase() === "observation") {
                         nextLevel();
+                    } else {
+                        handleIncorrectInput();
+                    }
+                } else if (level === 10) {
+                    if (userInput.toLowerCase() === "open sesame") {
+                        alert("Congratulations! You've completed the puzzle.");
                     } else {
                         handleIncorrectInput();
                     }
@@ -161,53 +169,44 @@
             }
 
             function handleIncorrectInput() {
+                const attemptsLeft = 10 - parseInt(inputEntries[currentLevel].dataset.attempts);
+                if (attemptsLeft === 1) {
+                    alert("Sorry, incorrect input. You have 1 attempt left.");
+                } else if (attemptsLeft === 0) {
+                    alert("Game Over! You have no more attempts left.");
+                } else {
+                    alert(`Sorry, incorrect input. You have ${attemptsLeft} attempts left.`);
+                }
+                inputEntries[currentLevel].dataset.attempts = parseInt(inputEntries[currentLevel].dataset.attempts) + 1;
                 inputEntries[currentLevel].value = "";
-                inputEntries[currentLevel].placeholder = "Incorrect input. Try again!";
             }
 
             function nextLevel() {
                 currentLevel++;
-                if (currentLevel >= levelTexts.length) {
-                    showEndScreen();
-                } else {
+                if (currentLevel <= 10) {
                     showLevel(currentLevel);
-                    insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
-                    encryptedLabels[currentLevel].textContent = encryptedTexts[currentLevel];
-                    inputEntries[currentLevel].focus();
+                    inputEntries[currentLevel].dataset.attempts = 0;
+                    levelTextAreas[currentLevel].value = "";
+                    encryptedLabels[currentLevel].innerText = "";
                 }
             }
 
-            function showEndScreen() {
-                frames.forEach((frame) => {
-                    frame.style.display = 'none';
-                });
-                const endScreen = document.createElement('div');
-                endScreen.className = 'end-screen';
-                endScreen.innerHTML = "<h1>Congratulations!</h1><p>You've completed all the levels of the puzzle game.</p>";
-                document.body.appendChild(endScreen);
-            }
-
-            // Set up the initial level
-            showLevel(currentLevel);
-            insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
-            encryptedLabels[currentLevel].textContent = encryptedTexts[currentLevel];
-            inputEntries[currentLevel].focus();
-
-            // Event listeners
             submitButtons.forEach((button, index) => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
                     checkInput(index);
                 });
             });
 
-            inputEntries.forEach((inputEntry) => {
-                inputEntry.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter') {
-                        const currentLevel = parseInt(inputEntry.getAttribute('data-level'));
-                        checkInput(currentLevel);
-                    }
-                });
+            levelTexts.forEach((text, index) => {
+                insertTextWithDelay(levelTextAreas[index], text);
             });
+
+            encryptedTexts.forEach((text, index) => {
+                insertTextWithDelay(encryptedLabels[index], text);
+            });
+
+            showLevel(currentLevel);
         });
     </script>
 </body>
