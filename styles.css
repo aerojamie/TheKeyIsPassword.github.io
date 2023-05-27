@@ -1,95 +1,85 @@
-@import 'reset'; // Optionally import a CSS reset or normalize file if desired
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #222;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    box-sizing: border-box;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  box-sizing: border-box;
 }
 
 .frame {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 50vh;
-    max-width: 500px;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #333;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the top */
+  height: 50vh;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .level-text {
-    width: 100%;
-    height: 150px;
-    resize: none;
-    font-size: 16px;
-    margin-bottom: 5px;
-    border: none;
-    border-radius: 8px;
-    background-color: #555;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 150px;
+  resize: none;
+  font-size: 16px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 8px;
+  background-color: #555;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .encrypted-label {
-    font-size: 18px;
-    margin-bottom: 20px;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .input-entry {
-    width: 100%;
-    height: 25px;
-    resize: none;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #555;
-    color: #fff;
+  width: 100%;
+  height: 25px;
+  resize: none;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #555;
+  color: #fff;
 }
 
 .submit-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 #outro-text {
-    display: none;
-    width: 100%;
-    height: 150px;
-    resize: none;
-    font-size: 16px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #555;
-    color: #fff;
+  display: none;
+  width: 100%;
+  height: 150px;
+  resize: none;
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #555;
+  color: #fff;
 }
