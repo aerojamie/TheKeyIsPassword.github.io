@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Puzzle Game</title>
+    <title>The Key Is Password</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
 </head>
@@ -14,7 +14,6 @@
             <button class="submit-button">Submit</button>
         </div>
         <textarea id="outro-text" cols="50" rows="10" disabled></textarea>
-    </div>
     </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -95,16 +94,15 @@
             }
 
             function checkInput(level) {
-    const userInput = inputEntries[level].value;
+                const userInput = inputEntries[level].value;
 
-    if (level === 0) {
-        if (userInput.toLowerCase() === "hello there") {
-            nextLevel();
-        } else {
-            handleIncorrectInput();
-            return; // Add this line to prevent the code from continuing to the incorrect condition
-        }
-    }
+                if (level === 0) {
+                    if (userInput.toLowerCase() === "hello there") {
+                        nextLevel();
+                    } else {
+                        handleIncorrectInput();
+                        return; // Add this line to prevent the code from continuing to the incorrect condition
+                    }
                 } else if (level === 1) {
                     if (userInput.toLowerCase() === "hello there") {
                         const trollCheck = "Ahahahaha! You think I'm a fool?";
