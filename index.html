@@ -99,9 +99,10 @@
 
     if (level === 0) {
         if (userInput.toLowerCase() === "hello there") {
-            nextLevel(); // Move nextLevel() here instead of calling showOutro()
+            nextLevel();
         } else {
             handleIncorrectInput();
+            return; // Add this line to prevent the code from continuing to the incorrect condition
         }
     }
                 } else if (level === 1) {
