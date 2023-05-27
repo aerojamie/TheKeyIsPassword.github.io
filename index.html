@@ -95,14 +95,15 @@
             }
 
             function checkInput(level) {
-                const userInput = inputEntries[level].value;
+    const userInput = inputEntries[level].value;
 
-                if (level === 0) {
-                    if (userInput.toLowerCase() === "hello there") {
-                        nextLevel();
-                    } else {
-                        handleIncorrectInput();
-                    }
+    if (level === 0) {
+        if (userInput.toLowerCase() === "hello there") {
+            nextLevel(); // Move nextLevel() here instead of calling showOutro()
+        } else {
+            handleIncorrectInput();
+        }
+    }
                 } else if (level === 1) {
                     if (userInput.toLowerCase() === "hello there") {
                         const trollCheck = "Ahahahaha! You think I'm a fool?";
