@@ -1,3 +1,5 @@
+@import 'reset'; // Optionally import a CSS reset or normalize file if desired
+
 html, body {
     height: 100%;
     margin: 0;
