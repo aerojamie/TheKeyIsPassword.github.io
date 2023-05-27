@@ -13,7 +13,6 @@
             <input class="input-entry" type="text"><br>
             <button class="submit-button">Submit</button>
         </div>
-        <textarea id="outro-text" cols="50" rows="10" disabled></textarea>
     </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -67,7 +66,6 @@
             const levelTextAreas = document.querySelectorAll('.level-text');
             const encryptedLabels = document.querySelectorAll('.encrypted-label');
             const submitButtons = document.querySelectorAll('.submit-button');
-            const outroText = document.getElementById('outro-text');
 
             let currentLevel = 0;
 
@@ -178,7 +176,6 @@
 
             function displayOutroText() {
                 frames[currentLevel].style.display = 'none';
-                outroText.style.display = 'block';
                 insertTextWithDelay(outroText, 'Congratulations! You have completed the puzzle!');
             }
 
