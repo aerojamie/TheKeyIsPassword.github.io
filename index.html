@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The Key Is Password</title>
+    <title>Puzzle Game</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
 </head>
@@ -131,32 +131,32 @@
                         handleIncorrectInput();
                     }
                 } else if (level === 5) {
-                    if (userInput.toLowerCase() === "west") {
+                    if (userInput.toLowerCase() === "riddles") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 6) {
-                    if (userInput.toLowerCase() === "gandalf") {
+                    if (userInput.toLowerCase() === "decode") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 7) {
-                    if (userInput.toLowerCase() === "spider-man") {
+                    if (userInput.toLowerCase() === "impossible") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 8) {
-                    if (userInput.toLowerCase() === "http") {
+                    if (userInput.toLowerCase() === "attention") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 9) {
-                    if (userInput.toLowerCase() === "key") {
-                        nextLevel();
+                    if (userInput.toLowerCase() === "what is the password") {
+                        displayOutroText();
                     } else {
                         handleIncorrectInput();
                     }
@@ -164,48 +164,34 @@
             }
 
             function handleIncorrectInput() {
-                // Handle incorrect input
-                // ...
+                inputEntries[currentLevel].value = '';
+                inputEntries[currentLevel].placeholder = 'Incorrect. Try again.';
             }
 
             function nextLevel() {
                 currentLevel++;
-                if (currentLevel < frames.length) {
-                    showLevel(currentLevel);
-                } else {
-                    showOutro();
-                }
+                inputEntries[currentLevel - 1].disabled = true;
+                inputEntries[currentLevel].value = '';
+                showLevel(currentLevel);
+                insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
+                encryptedLabels[currentLevel].textContent = encryptedTexts[currentLevel];
             }
 
-            function showOutro() {
-                frames.forEach(frame => {
-                    frame.style.display = 'none';
-                });
-
+            function displayOutroText() {
+                frames[currentLevel].style.display = 'none';
                 outroText.style.display = 'block';
-
-                const outroMessage = "Congratulations! You have successfully completed all the levels of the puzzle game. " +
-                    "You have proven your intelligence and problem-solving skills. Well done!\n\n";
-
-                insertTextWithDelay(outroText, outroMessage);
+                insertTextWithDelay(outroText, 'Congratulations! You have completed the puzzle!');
             }
 
-            frames.forEach((frame, index) => {
-                const levelTextArea = levelTextAreas[index];
-                const encryptedLabel = encryptedLabels[index];
-                const submitButton = submitButtons[index];
-
-                levelTextArea.value = '';
-                encryptedLabel.textContent = encryptedTexts[index];
-
-                insertTextWithDelay(levelTextArea, levelTexts[index]);
-
-                submitButton.addEventListener('click', () => {
+            submitButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
                     checkInput(index);
                 });
             });
 
-            showLevel(currentLevel);
+            showLevel(0);
+            insertTextWithDelay(levelTextAreas[0], levelTexts[0]);
+            encryptedLabels[0].textContent = encryptedTexts[0];
         });
     </script>
 </body>
