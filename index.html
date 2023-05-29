@@ -15,7 +15,6 @@
         </div>
         <textarea id="outro-text" cols="50" rows="10" disabled></textarea>
     </div>
-    </div>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
             const levelTexts = [
@@ -95,16 +94,15 @@
             }
 
             function checkInput(level) {
-    const userInput = inputEntries[level].value;
+                const userInput = inputEntries[level].value;
 
-    if (level === 0) {
-        if (userInput.toLowerCase() === "hello there") {
-            nextLevel();
-        } else {
-            handleIncorrectInput();
-            return; // Add this line to prevent the code from continuing to the incorrect condition
-        }
-    }
+                if (level === 0) {
+                    if (userInput.toLowerCase() === "hello there") {
+                        nextLevel();
+                    } else {
+                        handleIncorrectInput();
+                        return; // Add this line to prevent the code from continuing to the incorrect condition
+                    }
                 } else if (level === 1) {
                     if (userInput.toLowerCase() === "hello there") {
                         const trollCheck = "Ahahahaha! You think I'm a fool?";
@@ -139,26 +137,26 @@
                         handleIncorrectInput();
                     }
                 } else if (level === 6) {
-                    if (userInput.toLowerCase() === "gandalf") {
+                    if (userInput.toLowerCase() === "whatisthepassword") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 7) {
-                    if (userInput.toLowerCase() === "spider-man") {
+                    if (userInput.toLowerCase() === "quadruple") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 8) {
-                    if (userInput.toLowerCase() === "http") {
+                    if (userInput.toLowerCase() === "attentiontodetail") {
                         nextLevel();
                     } else {
                         handleIncorrectInput();
                     }
                 } else if (level === 9) {
-                    if (userInput.toLowerCase() === "key") {
-                        nextLevel();
+                    if (userInput.toLowerCase() === "congratulations") {
+                        showOutro();
                     } else {
                         handleIncorrectInput();
                     }
@@ -166,48 +164,49 @@
             }
 
             function handleIncorrectInput() {
-                // Handle incorrect input
-                // ...
+                const attemptsLeft = 10 - parseInt(inputEntries[currentLevel].dataset.attempts);
+                if (attemptsLeft > 1) {
+                    alert(`Incorrect input. You have ${attemptsLeft} attempts left.`);
+                    inputEntries[currentLevel].dataset.attempts = parseInt(inputEntries[currentLevel].dataset.attempts) + 1;
+                } else if (attemptsLeft === 1) {
+                    alert("Incorrect input. This is your last attempt!");
+                    inputEntries[currentLevel].dataset.attempts = parseInt(inputEntries[currentLevel].dataset.attempts) + 1;
+                } else {
+                    alert("Incorrect input. No attempts left. Moving to the next level.");
+                    nextLevel();
+                }
             }
 
             function nextLevel() {
                 currentLevel++;
-                if (currentLevel < frames.length) {
-                    showLevel(currentLevel);
-                } else {
+                if (currentLevel >= levelTexts.length) {
                     showOutro();
+                } else {
+                    inputEntries[currentLevel].value = "";
+                    inputEntries[currentLevel].dataset.attempts = 1;
+                    showLevel(currentLevel);
+                    insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
+                    encryptedLabels[currentLevel].textContent = encryptedTexts[currentLevel];
                 }
             }
 
             function showOutro() {
-                frames.forEach(frame => {
+                frames.forEach((frame) => {
                     frame.style.display = 'none';
                 });
-
                 outroText.style.display = 'block';
-
-                const outroMessage = "Congratulations! You have successfully completed all the levels of the puzzle game. " +
-                    "You have proven your intelligence and problem-solving skills. Well done!\n\n";
-
-                insertTextWithDelay(outroText, outroMessage);
+                insertTextWithDelay(outroText, "Congratulations! You've completed the puzzle!");
             }
 
-            frames.forEach((frame, index) => {
-                const levelTextArea = levelTextAreas[index];
-                const encryptedLabel = encryptedLabels[index];
-                const submitButton = submitButtons[index];
+            showLevel(currentLevel);
+            insertTextWithDelay(levelTextAreas[currentLevel], levelTexts[currentLevel]);
+            encryptedLabels[currentLevel].textContent = encryptedTexts[currentLevel];
 
-                levelTextArea.value = '';
-                encryptedLabel.textContent = encryptedTexts[index];
-
-                insertTextWithDelay(levelTextArea, levelTexts[index]);
-
-                submitButton.addEventListener('click', () => {
-                    checkInput(index);
+            submitButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    checkInput(currentLevel);
                 });
             });
-
-            showLevel(currentLevel);
         });
     </script>
 </body>
